@@ -1,0 +1,42 @@
+@CHARSET "utf-8";
+/**
+ * 著者：zanmai.net
+ * ご利用する場合、ご自分のサイトに　http://zanmai.netのリンクをお貼ってお願いします。(Copyrights@zanmai.net)
+ * JSの知識があれば、枠の大きさをご自由に変更してください。
+ */
+body {
+	float:center;
+	text-align:center;
+}
+#tag-cloud {
+	position:relative; 
+	width:800px; 
+	height:800px; 
+	margin: 30px; 
+	float:center;
+	text-align:center;
+}
+#tag-cloud a {
+	position:absolute; 
+	top:0px; 
+	left:0px; 
+	color:#000000;
+	font-weight:bold; 
+	text-decoration:none; 
+	padding: 3px 6px; 
+}
+#tag-cloud a:hover {
+	border: 1px solid #eee; 
+	background: #f0qf0f0;
+}
+p { 
+	font-size: 16px;
+	text-align: center;
+	color: #ba0c0c;
+}
+p a { 
+	font-size: 14px; color: #ba0c0c; 
+}
+p a:hover { 
+	color: red; 
+}

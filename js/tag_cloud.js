@@ -3,9 +3,9 @@
  * ご利用する場合、ご自分のサイトに　http://zanmai.netのリンクをお貼ってお願いします。(Copyrights@zanmai.net)
  * JSの知識があれば、枠の大きさをご自由に変更してください。
  */
-var radius = 100;
+var radius = 300;
 var dtr = Math.PI/180;
-var d=200;
+var d=500;
 
 var mcList = [];
 var active = false;
@@ -13,7 +13,7 @@ var lasta = 1;
 var lastb = 1;
 var distr = true;
 var tspeed=4;
-var size=200;
+var size=50;
 
 var mouseX=0;
 var mouseY=0;
@@ -173,7 +173,7 @@ function positionAll()
 	
 	var aTmp=[];
 	var oFragment=document.createDocumentFragment();
-	
+	/*
 	//ランダムの順位を付ける
 	for(i=0;i<aA.length;i++)
 	{
@@ -187,7 +187,7 @@ function positionAll()
 			return Math.random()<0.5?1:-1;
 		}
 	);
-	
+	*/
 	for(i=0;i<aTmp.length;i++)
 	{
 		oFragment.appendChild(aTmp[i]);
@@ -230,7 +230,7 @@ function doPosition()
 {
 	var l=oDiv.offsetWidth/2;
 	var t=oDiv.offsetHeight/2;
-	for(var i=0;i<mcList.length;i++)
+c	for(var i=0;i<mcList.length;i++)
 	{
 		aA[i].style.left=Math.abs(mcList[i].cx+l-mcList[i].offsetWidth/2)+'px';
 //		if(mcList[i].cx+l>=mcList[i].offsetWidth/2){

@@ -1,11 +1,81 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang='ja'>
   <head>
-    <meta charset="utf-8">
-    <script type="text/javascript" src="tag_cloud.js"></script>
+    <meta charset='utf-8'>
+    <style type='text/css'>
+      #exp label { display: block; width: 400px; font-size: 24px; margin: 0 auto;}
+    </style>
+    <script type='text/javascript' src='js/jquery-2.1.0.min.js'></script>
+    <script type='text/javascript' src='js/jquery.blockUI.js'></script>
+    <script type='text/javascript'>
+<!--
+  function showPlagin(idno){
+    pc = ('PlagClose' + (idno));
+    po = ('PlagOpen' + (idno));
+    if( document.getElementById(pc).style.display == "none" ) {
+      document.getElementById(pc).style.display = "block";
+      document.getElementById(po).style.display = "none";
+    }
+    else {
+      document.getElementById(pc).style.display = "none";
+      document.getElementById(po).style.display = "block";
+    }
+  }
+//-->
+    </script>
   </head>
-  <body>
-    <h1 align="center">いんてりや</h1>
-    <form action="">
+  <body style='margin: 30px 50px auto 50px;'>
+    <h1 style='font-size: 54px' align='center'>Dajare for an Interior</h1>
+    <form action='result' method='GET'>
+      <p style='margin: 20px 20px 20px 20px'>
+	<input type='text' name='sent' size='50' style='width: 60%;font-size:18pt; margin: 0 auto; display: block; padding: 0.1em 0.5em 0.1em 0.5em' placeholder='ダジャレの元となる日本語の文を入力'>
+      </p>
+      <h3 style='text-align: center; font-size: 20pt'>例文</h3>
+      <div id='exp' style='margin-left:auto;margin-right:auto;'>
+	<label>
+	  <input type='radio' name='exp' value='となりの客はよく柿食う客だ'>
+	  となりの客はよく柿食う客だ
+	</label>
+	<br />
+	<label>
+	  <input type='radio' name='exp' value='バスガス爆発'>
+	  バスガス爆発
+	</label>
+	<br />
+	<label>
+	  <input type='radio' name='exp' value='風が吹くと桶屋が儲かる'>
+	  風が吹くと桶屋が儲かる
+	</label>
+	<br />
+	<label>
+	  <input type='radio' name='exp' value='部屋とYシャツと私と小鳥と鈴と'>
+	  部屋とYシャツと私と小鳥と鈴と
+	</label>
+      </div>
+      <div style='margin: 20px auto 20px auto; width: 400px'>
+	<input type='submit' id='submit' value='ダジャレ生成' style='background-color:#ffffff;margin: 0 auto 0 25px; display:block '>
+      </div>
+    </form>
+    <h3 style='margin:50px auto 10px auto; text-align: center'>説明</h3>
+    <div style='display:block; width: 600px; margin: 0 auto; font-size:13pt'>
+      ダジャレの元となる日本語の文を入力するか，もしくは例文を選択し，「ダジャレ生成」ボタンを押すとダジャレが生成されスタイリッシュに表示される．
+      表示形式は球体，表，円柱などお好みのものを選択できる．
+      <div id='PlagOpen1' style='font-size:11pt'>
+	<a href='#' title='...' onclick='showPlagin(1);return false;'>...</a>
+      </div>
+      <div id='PlagClose1' style='display: none; font-size:11pt'>
+	<a href='#' title='...' onclick='showPlagin(1);return false;'>...</a>
+	<p>
+	  太古から日本人の中で育まれ受け継がれてきた文化がある．それが「しゃれ」だ．
+	  古代，奈良・平安期には，その頃のもっともメジャーなコミュニケーションツールとしての「和歌」のうちに，「掛詞」として含まれている．
+	</p><p>
+	  その「しゃれ」のうちでも，つまらないものが「だじゃれ」と呼ばれるが，このつまらなさは，現代のナンセンス文学と通ずるところがあると思われる．
+	  そのため，一見してセンスの無いように見える「だじゃれ」であるが，実は寧ろ趣きのあるスタイリッシュなレトリックであるのだ．
+	</p><p>
+	  このお洒落な「だじゃれ」を機械的に生成することは，日本人の，いや人類の欲してやまないところであった．
+	  私は，この「だじゃれ」を機械的に生成し，しかもそれをファッショナブルにインテリアとして「展示」することを可能にするプログラムを完成させた．
+	</p>
+      </div>
+    </div>
   </body>
 </html>

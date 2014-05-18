@@ -2,23 +2,30 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <script type="text/javascript" src="tag_cloud.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+    <script type="text/javascript" src="js/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
+    <script type="text/javascript" src="js/loading.js"></script>
   </head>
-  <body>
-<div align="center">
-<h1><a href="/">いんてりや</a></h1>
-<div id="tagcloud" style="overflow: hidden;" onmouseover="onMouseCloud();" onmouseout="offMouseCloud();" onmousemove="mouseHandler(event);" >
+  <body style="margin: 50px 50px 50px 50px;">
+    <div align="center" id="main">
+      <h1><a href="/">インテリや</a></h1>
+      <div id="tagcloud" style="overflow: hidden;" onmouseover="onMouseCloud();" onmouseout="offMouseCloud();" onmousemove="mouseHandler(event);" />
 <div id="tagcloudInner" style="position:relative;"></div>
 </div>
 <script type="text/javascript">
 <!--
+var onMouseCloud;
+var offMouseCloud;
+var mouseHandler;
+var onMouseAnc;
+var offMouseAnc;
 var cloudSize = 1024; // px クラウドサイズ(縦横共通) カラムの幅(width)と同じ値を設定してください。
 var maxTagNum = 200; // タグの最大表示件数 -1:全件表示
 var darkColor = 0; // 最も手前にあるときの文字の暗さ 0～255
 var lightColor = 216; // 最も 奥 にあるときの文字の明るさ 0～255
 var linkColor = "#FF6600"; // タグにマウスが乗った時の色
 var maxFont = 144; // px 使用回数最多のタグのフォントサイズ
-var minFont = 144; // px 使用回数最少のタグのフォントサイズ
+var minFont = 18; // px 使用回数最少のタグのフォントサイズ
 var rewriteSec = 10; // 再描画間隔(ミリ秒)
 var maxVelocity = 2000; // 1周にかかるおよそのミリ秒数
 var attenuation = 0.95; // 減衰率 (0～1) マウスオーバーしていないときの速度の減衰率
@@ -41,11 +48,11 @@ var mouseX = 0;
 var mouseY = 0;
 var isOnAnc = false;
 var tagNameList = <% (format t "[~{\"~A\"~^, ~}]" (getf env :dajare)) %>;
-tagNameList.shift();
+//tagNameList.shift();
 var tagLinkList = tagNameList;
-tagLinkList.shift();
-var tagNumList = tagNameList;
-tagNumList.shift();
+//tagLinkList.shift();
+var tagNumList = <% (format t "[~{~A~^, ~}]" (mapcar (lambda (x) 1) (getf env :dajare))) %>;
+//tagNumList.shift();
 var posi = new Array();
 var dtag = new Array();
 var atag = new Array();
@@ -62,8 +69,8 @@ tagNameList.splice(maxTagNum, tagNameList.length-maxTagNum);
 tagLinkList.splice(maxTagNum, tagLinkList.length-maxTagNum);
 tagNumList.splice (maxTagNum, tagNumList.length -maxTagNum);
 }
-minCount = tagNumList[0];
-maxCount = tagNumList[0];
+minCount = tagNumList.length;
+maxCount = tagNumList.length;
 for (i=1;i<tagNameList.length-1;i++)
 {
 if (minCount > tagNumList[i]) minCount = tagNumList[i];
@@ -78,7 +85,7 @@ cntsqrY += 1;
 }
 for (i=0;i<tagNameList.length;i++)
 {
-var sfont = (maxFont-minFont)/(Math.log(maxCount)-Math.log(minCount))*(Math.log(tagNumList[i])-Math.log(minCount)) + minFont;
+var sfont = minFont+((maxFont-minFont)/tagNumList.length);
 posi[i] = new Position(tagNameList[i], tagLinkList[i], sfont);
 }
 // シャッフル
@@ -181,15 +188,15 @@ function mouseCheck()
 if (isOnAnc==true) offMouseCloud();
 setTimeout('mouseCheck()',1500);
 }
-function onMouseCloud()
+onMouseCloud = function()
 {
 isOnMouseCloud=true;
-}
-function offMouseCloud()
+};
+offMouseCloud = function ()
 {
 isOnMouseCloud=false;
-}
-function mouseHandler(event)
+};
+mouseHandler = function (event)
 {
 if (!event) event = window.event;
 var mox;
@@ -223,8 +230,8 @@ mouseX = mox;
 mouseY = moy;
 isOnAnc=false;
 }
-}
-function onMouseAnc(event)
+};
+var onMouseAnc = function (event)
 {
 if (!event) event = window.event;
 var elem;
@@ -239,8 +246,8 @@ if (elem.name)
 var id = Number(elem.name.substring(wordKeyAnc.length));
 posi[id].onMouse();
 }
-}
-function offMouseAnc(event)
+};
+offMouseAnc = function(event)
 {
 if (!event) event = window.event;
 var elem;
@@ -328,7 +335,6 @@ this.height = dtag[id].offsetHeight;
 }
 // -->
 </script>
-</div>
-
+    </div>
   </body>
 </html>

@@ -219,15 +219,18 @@ TODO:
     (port->string (process-output p 'out))))
 
 (define (yomi-alist input)
-  (read-from-string
-   (string-append/shared
-    "("
-    (regexp-replace-all #/\n|EOS|dummy/
-			(run-mecab
-			 '("--node-format=(\"%m\"\\s\"%f[7]\"\\s\"%H\")\\s")
-			 input)
-			"")
-    ")")))
+  (let ((input (regexp-replace-all #/\w+/
+				   input
+				   "")))
+    (read-from-string
+     (string-append/shared
+      "("
+      (regexp-replace-all #/\n|EOS|dummy/
+			  (run-mecab
+			   '("--node-format=(\"%m\"\\s\"%f[7]\"\\s\"%H\")\\s")
+			   input)
+			  "")
+      ")"))))
 
 (define (kata->hira str)
   (list->string
